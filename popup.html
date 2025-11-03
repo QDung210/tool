@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Form Auto Answer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 350px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #667eea;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    #saveApiKey {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    #saveApiKey:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    #autoAnswer {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+    }
+
+    #autoAnswer:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+    }
+
+    #autoAnswer:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .status {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      text-align: center;
+      display: none;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    .api-status {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      text-align: center;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #c8e6c9;
+    }
+
+    .api-status.not-set {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .log-container {
+      margin-top: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      max-height: 300px;
+      background: #f8f9fa;
+    }
+
+    .log-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: #667eea;
+      color: white;
+      font-size: 13px;
+    }
+
+    .clear-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .clear-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .logs {
+      padding: 10px;
+      max-height: 250px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .log-entry {
+      padding: 4px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .log-entry:last-child {
+      border-bottom: none;
+    }
+
+    .log-time {
+      color: #6c757d;
+      margin-right: 6px;
+    }
+
+    .log-success {
+      color: #28a745;
+    }
+
+    .log-error {
+      color: #dc3545;
+      font-weight: 600;
+    }
+
+    .log-info {
+      color: #17a2b8;
+    }
+
+    .log-warning {
+      color: #ffc107;
+    }
+
+    .log-question {
+      color: #6f42c1;
+      font-weight: 600;
+    }
+
+    .log-answer {
+      color: #fd7e14;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 Auto Answer Form</h1>
+    
+    <div id="apiStatus" class="api-status not-set">
+      ⚠️ Chưa thiết lập API Key
+    </div>
+
+    <div class="input-group">
+      <label for="apiKey">GROQ API Key:</label>
+      <input type="password" id="apiKey" placeholder="Nhập API key của bạn...">
+    </div>
+
+    <button id="saveApiKey">💾 Lưu API Key</button>
+    <button id="autoAnswer" disabled>🚀 Tự Động Trả Lời</button>
+
+    <div id="status" class="status"></div>
+    
+    <div id="logContainer" class="log-container" style="display: none;">
+      <div class="log-header">
+        <strong>📋 Logs:</strong>
+        <button id="clearLogs" class="clear-btn">🗑️ Xóa</button>
+      </div>
+      <div id="logs" class="logs"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

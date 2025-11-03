@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn sử dụng Google Form Auto Answer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        h2 {
+            color: #764ba2;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .step h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .feature-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Google Form Auto Answer</h1>
+        <p class="subtitle">Extension Chrome tự động trả lời câu hỏi Google Form bằng AI</p>
+
+        <div class="success">
+            <strong>✅ Hoàn thành!</strong> Extension đã được tạo thành công. Làm theo hướng dẫn bên dưới để cài đặt và sử dụng.
+        </div>
+
+        <h2>📦 Tính năng</h2>
+        <div class="feature-list">
+            <div class="feature-item">
+                <span class="emoji">✅</span>
+                <strong>Q1:</strong> Câu hỏi trắc nghiệm thường (1 đáp án)
+            </div>
+            <div class="feature-item">
+                <span class="emoji">☑️</span>
+                <strong>Q2:</strong> Câu hỏi chọn nhiều đáp án
+            </div>
+            <div class="feature-item">
+                <span class="emoji">🖼️</span>
+                <strong>Q3:</strong> Câu hỏi có hình ảnh
+            </div>
+            <div class="feature-item">
+                <span class="emoji">🤖</span>
+                <strong>AI:</strong> Powered by Llama 3.3 70B
+            </div>
+            <div class="feature-item">
+                <span class="emoji">🎯</span>
+                <strong>Smart:</strong> Prompt được tối ưu
+            </div>
+            <div class="feature-item">
+                <span class="emoji">🔒</span>
+                <strong>Secure:</strong> API key lưu local
+            </div>
+        </div>
+
+        <h2>🚀 Cài đặt Extension</h2>
+
+        <div class="step">
+            <h3>Bước 1️⃣: Lấy GROQ API Key</h3>
+            <ol>
+                <li>Truy cập <a href="https://console.groq.com/" target="_blank">https://console.groq.com/</a></li>
+                <li>Đăng ký hoặc đăng nhập tài khoản (miễn phí)</li>
+                <li>Vào mục <strong>API Keys</strong></li>
+                <li>Click <strong>Create API Key</strong></li>
+                <li>Copy API key (bắt đầu bằng "gsk_...")</li>
+            </ol>
+            <div class="info">
+                <strong>ℹ️ Lưu ý:</strong> GROQ cung cấp API miễn phí với giới hạn requests. Đủ để sử dụng cho mục đích học tập.
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Bước 2️⃣: Cài Extension vào Chrome</h3>
+            <ol>
+                <li>Mở trình duyệt <strong>Google Chrome</strong></li>
+                <li>Truy cập vào: <code>chrome://extensions/</code></li>
+                <li>Bật <strong>Developer mode</strong> ở góc trên bên phải</li>
+                <li>Click nút <strong>Load unpacked</strong></li>
+                <li>Chọn thư mục: <code>C:\Users\dung\OneDrive\Desktop\tool</code></li>
+                <li>Extension sẽ xuất hiện với icon 🤖</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Bước 3️⃣: Cấu hình API Key</h3>
+            <ol>
+                <li>Click vào icon Extension trên thanh công cụ Chrome</li>
+                <li>Nhập <strong>GROQ API Key</strong> vào ô input</li>
+                <li>Click nút <strong>💾 Lưu API Key</strong></li>
+                <li>Thông báo "✅ API Key đã được thiết lập" sẽ hiển thị</li>
+            </ol>
+            <div class="success">
+                <strong>✅ Xong!</strong> API key đã được lưu an toàn trong Chrome Storage (chỉ bạn mới truy cập được).
+            </div>
+        </div>
+
+        <h2>🎮 Cách sử dụng</h2>
+
+        <div class="step">
+            <h3>Sử dụng trên Google Form</h3>
+            <ol>
+                <li>Mở bất kỳ <strong>Google Form</strong> nào (ở chế độ làm bài)</li>
+                <li>Click vào icon Extension 🤖</li>
+                <li>Click nút <strong>🚀 Tự Động Trả Lời</strong></li>
+                <li>Chờ extension phân tích và điền đáp án (vài giây)</li>
+                <li>Kiểm tra các đáp án đã được chọn</li>
+                <li>Nếu hài lòng, click <strong>Submit</strong> form</li>
+            </ol>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Lưu ý quan trọng:</strong>
+            <ul style="margin-top: 10px;">
+                <li>Extension chỉ hoạt động trên trang <code>docs.google.com/forms</code></li>
+                <li>Cần có kết nối internet để gọi API</li>
+                <li>Kiểm tra lại đáp án trước khi submit (AI có thể sai)</li>
+                <li>Sử dụng có trách nhiệm, chỉ cho mục đích học tập</li>
+                <li>Không sử dụng cho các bài kiểm tra chính thức</li>
+            </ul>
+        </div>
+
+        <h2>🔧 Cách hoạt động</h2>
+        <div class="info">
+            <ol>
+                <li><strong>Phân tích HTML:</strong> Extension đọc cấu trúc Google Form</li>
+                <li><strong>Nhận diện loại câu hỏi:</strong> Radio (1 đáp án) hoặc Checkbox (nhiều đáp án)</li>
+                <li><strong>Kiểm tra hình ảnh:</strong> Phát hiện nếu câu hỏi có ảnh kèm theo</li>
+                <li><strong>Tạo Prompt:</strong> Tạo prompt phù hợp cho từng loại câu hỏi</li>
+                <li><strong>Gọi GROQ API:</strong> Gửi prompt đến Llama 3.3 70B model</li>
+                <li><strong>Parse kết quả:</strong> Nhận số thứ tự đáp án từ AI</li>
+                <li><strong>Auto click:</strong> Tự động click chọn đáp án đúng</li>
+            </ol>
+        </div>
+
+        <h2>🎯 Ví dụ Prompt</h2>
+        <p>Extension tự động tạo prompt tối ưu:</p>
+        
+        <h3>Câu hỏi không có đề bài (Q1, Q2):</h3>
+        <div class="code-block">
+Đây là một câu hỏi trắc nghiệm chỉ chọn 1 đáp án. 
+Câu hỏi KHÔNG có đề bài, chỉ có các đáp án sau:
+
+1. A: AI is powering personal devices...
+2. B: Through the smart grid...
+3. C: AI runs on computers...
+4. D: Similar to electricity...
+
+Hãy phân tích nội dung các đáp án và suy luận để chọn 
+đáp án đúng nhất. Chỉ trả lời bằng số thứ tự (1-4).
+        </div>
+
+        <h2>🐛 Xử lý lỗi</h2>
+        
+        <div class="step">
+            <h3>Nếu extension không hoạt động:</h3>
+            <ol>
+                <li>Mở DevTools: Press <code>F12</code></li>
+                <li>Vào tab <strong>Console</strong></li>
+                <li>Tìm lỗi màu đỏ</li>
+                <li>Hoặc Right-click icon extension → <strong>Inspect</strong></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Các lỗi thường gặp:</h3>
+            <ul>
+                <li><strong>"API key chưa được thiết lập"</strong> → Nhập lại API key</li>
+                <li><strong>"API error: 401"</strong> → API key không hợp lệ</li>
+                <li><strong>"API error: 429"</strong> → Đã vượt quá giới hạn requests, chờ một lúc</li>
+                <li><strong>"Không tìm thấy câu hỏi"</strong> → Form có cấu trúc đặc biệt, chưa được hỗ trợ</li>
+            </ul>
+        </div>
+
+        <h2>📁 Cấu trúc Project</h2>
+        <div class="code-block">
+tool/
+├── manifest.json      # Cấu hình extension
+├── popup.html         # Giao diện popup
+├── popup.js          # Logic popup
+├── content.js        # Script chạy trên Google Form
+├── background.js     # Service worker
+├── icon16.png        # Icon 16x16
+├── icon48.png        # Icon 48x48
+├── icon128.png       # Icon 128x128
+├── create_icons.py   # Script tạo icon
+├── README.md         # Tài liệu
+├── INSTALL.md        # Hướng dẫn cài đặt
+└── guide.html        # File này (hướng dẫn chi tiết)
+        </div>
+
+        <h2>📝 Credits</h2>
+        <ul>
+            <li><strong>AI Model:</strong> Llama 3.3 70B Versatile by Meta (via GROQ)</li>
+            <li><strong>API Provider:</strong> GROQ Cloud</li>
+            <li><strong>Icons:</strong> Generated with Python + Pillow</li>
+            <li><strong>UI:</strong> Custom CSS with gradient design</li>
+        </ul>
+
+        <div class="success" style="margin-top: 30px; text-align: center;">
+            <h3>🎉 Chúc bạn sử dụng thành công!</h3>
+            <p>Nếu có vấn đề, hãy kiểm tra Console để debug.</p>
+        </div>
+    </div>
+</body>
+</html>
